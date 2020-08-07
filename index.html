@@ -1,0 +1,46 @@
+<html>
+    <head></head>
+    <body>
+        <script>
+
+            function computerPlay(){
+                let randomNumber = Math.floor(Math.random() * 3) + 1  
+                if (randomNumber == 1){
+                    return "Rock"
+                }else if (randomNumber == 2){
+                    return "Paper"
+                }else if (randomNumber == 3){
+                    return "Scissors"
+                }
+            }
+
+            function play(playerSelection, computerSelection){
+                let player = playerSelection.toLowerCase()
+                computerSelection = computerPlay().toLowerCase()
+                if(player == computerSelection){
+                    return "It's a draw!"
+                }else if(player == "scissors" && computerSelection == "paper"){
+                    return "You win!, Scissors beats Paper!"
+                }else if(player == "rock" && computerSelection == "paper"){
+                    return "You lose!, Paper beats Rock!"
+                }else if(player == "paper" && computerSelection == "rock"){
+                    return "You win!, Paper beats Rock!"
+                }else if(player == "scissors" && computerSelection == "rock"){
+                    return "You lose!, Rock beats Scissors!"
+                }else if(player == "rock" && computerSelection == "scissors"){
+                    return "You win!, Rock beats Scissors!"
+                }else if(player == "paper" && computerSelection == "scissors"){
+                    return "You lose!, Scissors beats paper!"
+                }
+            }
+
+            function game(){
+                for (let i = 0; i < 5; i++){
+                    let choice = prompt("What do you wan to play?")
+                    play(choice)
+
+                }
+            }
+        </script>
+    </body>
+</html>
