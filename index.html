@@ -1,7 +1,99 @@
 <html>
-    <head></head>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
     <body>
+
+        <div id="container">
+            <div id="title">
+                <h1>Rock, Paper, Scissors Game</h1>
+                <h2>Made by: <span id="logo">Andrei Totoro</span></h2>
+            </div>
+            
+        <div id="stats">
+            <h2 id="gameresults">You can start playing by picking either rock, paper or scissors</h2>
+            <h2 id="results">You will see your score here!</h2>
+            <h2 id="games">Each game has 5 rounds!</h2>
+        </div>
+
+            <div id="buttons">
+                <h1>Pick one!</h1>
+                <button id="rock"><h1>Rock</h1></button>
+                <button id="paper"><h1>Paper</h1></button>
+                <button id="scissors"><h1>Scissors</h1></button>
+            </div>
+
+
+        </div>
+       
+
+
         <script>
+            let playerPoints = 0;
+            let computerPoints = 0;
+            let gamesPlayed = 0;
+            let score = "";
+            const rock = document.querySelector("#rock")
+            const paper = document.querySelector("#paper")
+            const scissors = document.querySelector("#scissors")
+            const noGames = document.querySelector("#games")
+            const gameresults = document.querySelector("#gameresults")
+            const results = document.querySelector("#results")
+
+            rock.addEventListener("click", () => {
+                play(rock.id);
+                scoreUpdate();
+            })
+
+
+            paper.addEventListener("click", () => {
+                play(paper.id);
+                scoreUpdate();
+                
+            })
+
+
+            scissors.addEventListener("click", () => {
+                play(scissors.id);
+                scoreUpdate();
+            })
+
+
+            function scoreUpdate(){
+                gamesPlayed++;  
+                gameresults.textContent = arr[0];
+                results.textContent = "Your score is: " + playerPoints + ", while the computer's score is: " + computerPoints + "."
+                noGames.textContent = "You have played a total of " + gamesPlayed + " rounds, There are " + (5 - gamesPlayed) + " rounds remaining!";
+                if(gamesPlayed >= 5){
+                    if(playerPoints > computerPoints){
+                        results.textContent = "This game has ended! You have won!"
+                        results.style.color = "green";
+                        gameresults.textContent = "";
+                        noGames.textContent = "";
+                        playerPoints = 0;
+                        computerPoints = 0;
+                        gamesPlayed = 0;
+                    }
+                    else if(playerPoints < computerPoints){
+                        results.textContent = "This game has ended! The computer won!"
+                        results.style.color = "green";
+                        gameresults.textContent = "";
+                        noGames.textContent = "";
+                        playerPoints = 0;
+                        computerPoints = 0;
+                        gamesPlayed = 0;
+                    }
+                    else if(playerPoints == computerPoints){
+                        results.textContent = "This game has ended! It's a draw!"
+                        results.style.color = "green";
+                        gameresults.textContent = "";
+                        noGames.textContent = "";
+                        playerPoints = 0;
+                        computerPoints = 0;
+                        gamesPlayed = 0;
+                    }
+                }
+            }
 
             function computerPlay(){
                 let randomNumber = Math.floor(Math.random() * 3) + 1  
@@ -14,53 +106,33 @@
                 }
             }
 
-            function play(playerSelection, computerSelection){
-                let player = playerSelection.toLowerCase()
-                computerSelection = computerPlay()
-                if(player == computerSelection){
+            function play(playerPlay){
+                let player = playerPlay;
+                let computer = computerPlay()
+                console.log(player)
+                if(player == computer){
                     return arr = ["It's a draw!", 2]
-                }else if(player == "scissors" && computerSelection == "paper"){
+                }else if(player == "scissors" && computer == "paper"){
+                    playerPoints++;
                     return arr = ["You win!, Scissors beats Paper!", 0]
-                }else if(player == "rock" && computerSelection == "paper"){
+                }else if(player == "rock" && computer == "paper"){
+                    computerPoints++;
                     return arr = ["You lose!, Paper beats Rock!", 1]
-                }else if(player == "paper" && computerSelection == "rock"){
+                }else if(player == "paper" && computer == "rock"){
+                    playerPoints++;
                     return arr = ["You win!, Paper beats Rock!", 0]
-                }else if(player == "scissors" && computerSelection == "rock"){
+                }else if(player == "scissors" && computer == "rock"){
+                    computerPoints++;
                     return arr = ["You lose!, Rock beats Scissors!", 1]
-                }else if(player == "rock" && computerSelection == "scissors"){
+                }else if(player == "rock" && computer == "scissors"){
+                    playerPoints++;
                     return  arr = ["You win!, Rock beats Scissors!", 0]
-                }else if(player == "paper" && computerSelection == "scissors"){
+                }else if(player == "paper" && computer == "scissors"){
+                    computerPoints++;
                     return arr = ["You lose!, Scissors beats paper!", 1]
                 }
             }
 
-            function game(){
-                let cscore = 0
-                let pscore = 0
-                for (let i = 0; i < 5; i++){
-                    let playerSelection = prompt("What do you want to play?")
-                    play(playerSelection)
-
-                    if(arr[1] == 0){
-                        pscore = pscore + 1
-                        console.log(arr[0])
-                    }else if (arr[1] == 1){
-                        cscore = cscore + 1
-                        console.log(arr[0])
-                    }else if (arr[1] ==  2){
-                        console.log(arr[0])
-                    }
-                }
-                    if(pscore < cscore){
-                        return "The score was: " + pscore + " to " + cscore + "! You have lost!"
-                    }else if(pscore > cscore){
-                        return "The score was: " + pscore + " to " + cscore + "! You have won!"
-                    }
-                    else if(pscore == cscore){
-                        return "The score was: " + pscore + " to " + cscore + "! It's a draw!"
-                    }
-                    
-            }
         </script>
     </body>
 </html>
